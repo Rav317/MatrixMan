@@ -1,0 +1,28 @@
+exiftool: get metadata for any file
+
+headers: every file has some magic headers, which tell what type of file
+         is it. check on wikipedia
+use hexedit to change headers in hex format
+sudo apt install hexedit
+
+file: command to find out what the file type is actually.
+
+strings: get text output from files
+
+sonic-visualiser: for audio stego
+
+steghide: hiding text in jpeg file
+	steghide extract -sf <file>
+
+zsteg: lsb extraction : works with only png or bmp files
+
+stegsnow: for getting data hidden in whitespaces
+	running: stegsolve -C <file>
+
+stegsolve: to view image in different planes
+	running it: java -jar stegsolve.jar
+
+
+using online steganographic tools: https://stylesuxx.github.io/steganography/
+
+binwalk / foremost : to extract multiple image files from one file
