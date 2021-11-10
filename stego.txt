@@ -26,3 +26,7 @@ stegsolve: to view image in different planes
 using online steganographic tools: https://stylesuxx.github.io/steganography/
 
 binwalk / foremost : to extract multiple image files from one file
+
+NOTE: use -h or --help to get help in commands
+-----
+
