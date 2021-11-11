@@ -9,7 +9,7 @@ file: command to find out what the file type is actually.
 
 strings: get text output from files
 
-sonic-visualiser: for audio stego
+sonic-visualiser / audacity: for audio stego
 
 steghide: hiding text in jpeg file
 	steghide extract -sf <file>
