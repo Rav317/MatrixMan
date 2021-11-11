@@ -1,0 +1,142 @@
+ETHICAL HACKING
+    
+METASPLOIT
+    For example, Target IP:10.0.2.5
+
+Basic scans:
+sudo nmap -sP 10.0.2.0/24
+sudo nmap -A -p- 10.0.2.5
+sudo nmap --script=vuln -p- 10.0.2.5
+
+Msfconsole:
+msfconsole> show exploits
+msfconsole> search <keyword>
+…> use <name_of_exploit>  or use <number>
+…> info or show options
+Generally, RHOSTS for will not be set which will be the target victim machine.
+Set the other missing parameters accordingly.
+…> set RHOSTS 10.0.2.15
+Payloads may be selected by default or need to be set.
+…> show payloads
+Select a payload from the list, preferably one that gives a reverse shell.
+…> set payload <name>
+Find out if there are any additional parameters to fill up in case of reverse shell like Listening host IP and listening port
+    …> show options 
+    …> set LHOST <ip>
+    …> set LPORT <port>
+    Run the exploit
+    ...> run or exploit
+
+Common Meterpreter session commands:
+List all commands 
+>help
+
+CTF
+CRYPTOGRAPHY
+Useful online tools to decode:
+https://www.dcode.fr/
+https://www.base64decode.org/
+https://cryptii.com/
+https://gchq.github.io/CyberChef/
+
+Cracking hashes
+https://crackstation.net/
+
+John the Ripper 
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+
+fcrackzip 
+fcrackzip -D -u -p rockyou.txt  filename.zip
+
+rockyou.txt wordlist available by default on kali.
+https://github.com/danielmiessler/SecLists
+
+
+Hashcat
+
+
+STEGANOGRAPHY
+
+Steghide - https://github.com/StefanoDeVuono/steghide 
+Zsteg - https://github.com/zed-0xff/zsteg 
+Exiftool - 
+Audio visualiser- https://www.sonicvisualiser.org/
+
+WEB
+https://fareedfauzi.gitbook.io/ctf-checklist-for-beginner/web
+https://www.wappalyzer.com/ 
+Burpsuite - Download from https://portswigger.net/burp/communitydownload
+        
+General extensions to look for: /index.html, index.php, flag.txt, flag.php, flag.html
+Or perform a `dirb` scan to find out
+/robots.txt - All the accessible urls
+(A robots.txt file tells search engine crawlers which URLs the crawler can access on your site. This is used mainly to avoid overloading your site with requests.)
+
+Cookies
+Source Code viewable in the Inspector
+Cookies - Viewable in Inspector>Application>Cookies
+        Cookies are usually encoded in base64, especially if they start with ey
+        Steal admin cookies and use them to obtain admin privileges
+        Can also be obtained using document.cookie on the console
+        
+SQL Injection
+General Cheatsheet: http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet
+
+            Usual Bypasses:
+            
+            DB-enumeration:
+    
+
+
+WIFI & PASSWORD CRACKING
+iwconfig: shows wireless configuration
+
+using airmon-ng
+-----------------
+
+sudo airmon-ng  check kill : checks if any process is holding wifi, we kill the processes
+this is done so that, when monitor mode is opened, the processes dont change it to managed
+mode.
+
+sudo airmon-ng start wlan0 : starts monitor mode on wlan0 interface
+
+sudo airodump-ng wlan0mon (monitor mode interface) : outputs all wifis available
+
+copy the BSSID (base station id) for the wifi to hack
+
+sudo airodump-ng --bssid <bssid> -c 2 -w capture wlan0mon : capture pkts of wifi
+
+in separate terminal: sudo aireplay-ng -0 0 -a <BSSID> -c <client> wlan0mon
+we disconnect the clients so that we can spoof packets
+
+aircrack-ng capture-01.cap -w /usr/share/wordlists/rockyou.txt
+here, capture-01.cap is the captured file
+/usr/share/wordlists/rockyou.txt : wordlist used
+
+using hashcat
+--------------
+install hashcat
+
+/usr/share/hashcat-utils/cap2hccapx.bin capture-01.cap capture.hccapx
+
+hashcat -a 0 -n 2500 capture.hccapx /usr/share/wordlists/rockyou.txt -o cap.txt
+
+one more method
+---------------
+hashcat -a 0 -m 100 top100.txt mine.txt -o password.txt
+-m : mode 100
+top100.txt contains popular hashes
+mine.txt : password list
+
+Brute forcing post office
+-----------------------
+tool: hydra
+hydra -L realusers.txt -P ./wordlists/weak_passwords.txt 192.168.56.102 pop3
+
+
+MALWARE
+
+
+GIT REPO WITH A COLLECTION OF TOOLS FOR ALL TYPES OF EH EXPLOITS :- https://github.com/JohnHammond/ctf-katana
+
+
